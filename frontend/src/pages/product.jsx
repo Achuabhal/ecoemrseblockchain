@@ -156,7 +156,6 @@ export default function EcommercePage() {
           
           // Clear form fields
           setBuyerAddress('');
-          setSellerAddress('');
           setEscrowAmount('');
 
           // Optionally: Fetch next escrow ID or additional details here
@@ -209,7 +208,7 @@ export default function EcommercePage() {
           setLoading(false);
       }
   };
-
+ 
 
 
 
@@ -277,6 +276,41 @@ export default function EcommercePage() {
   // Calculate cart totals
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0)
   const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
+
+
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    email: "",
+    sellerAddress: "0x15e6F7d05dF07988E48444A61E9615558dA6f186",  // add value or get dynamically        // add value or get dynamically
+  });
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Function to send order data
+  const sendOrder = async () => {
+   try {
+  console.log("Sending order data:", cart);
+  const response = await api.post("/api/order", {
+    ...formData,
+    product: cart
+  });
+  console.log("Order created:", response.data);
+  alert("Order submitted successfully!");
+} catch (error) {
+  console.error("Error submitting order:", error);
+  alert("Failed to submit order.");
+}
+
+  };
 
   return (
     <>
@@ -500,34 +534,87 @@ export default function EcommercePage() {
               </div>
 
               <div className="mb-4">
-                <h4 className="mb-3">Shipping Information</h4>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label className="form-label">First Name</label>
-                    <input type="text" className="form-control" placeholder="John" />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Last Name</label>
-                    <input type="text" className="form-control" placeholder="Doe" />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label">Address</label>
-                    <input type="text" className="form-control" placeholder="123 Main St" />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">City</label>
-                    <input type="text" className="form-control" placeholder="New York" />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Postal Code</label>
-                    <input type="text" className="form-control" placeholder="10001" />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label">Email</label>
-                    <input type="email" className="form-control" placeholder="john.doe@example.com" />
-                  </div>
-                </div>
-              </div>
+      <h4 className="mb-3">Shipping Information</h4>
+      <div className="row g-3">
+        <div className="col-md-6">
+          <label className="form-label">First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="John"
+            className="form-control"
+            value={formData.firstName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label className="form-label">Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Doe"
+            className="form-control"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-12">
+          <label className="form-label">Address</label>
+          <input
+            type="text"
+            name="address"
+            placeholder="123 Main St"
+            className="form-control"
+            value={formData.address}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label className="form-label">City</label>
+          <input
+            type="text"
+            name="city"
+            placeholder="New York"
+            className="form-control"
+            value={formData.city}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label className="form-label">Postal Code</label>
+          <input
+            type="text"
+            name="postalCode"
+            placeholder="10001"
+            className="form-control"
+            value={formData.postalCode}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-12">
+          <label className="form-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="john.doe@example.com"
+            className="form-control"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-12">
+          <button onClick={sendOrder} className="btn btn-primary mt-3">
+            Submit Order
+          </button>
+        </div>
+      </div>
+    </div>
 
               <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
             <h1>Escrow Manager Interaction</h1>
@@ -590,7 +677,6 @@ export default function EcommercePage() {
             )}
         </div>
 
-              <button className="btn btn-primary w-100 py-2">Complete Order</button>
             </div>
           ) : (
             <>

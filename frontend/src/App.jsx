@@ -6,6 +6,7 @@ import Login from './pages/login';
 import Admin from './pages/prupdate';
 import P from "./pages/product"
 import Server from "./pages/server";
+import Test from "./test"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/hii" element={< Sign/>} />
         <Route path="/admin" element={< Admin/>} />
         <Route path="/server" element={<Server />} />
+        <Route path="/test" element={<Test />} />
 
 
         <Route path="/product" element={<P />} />
