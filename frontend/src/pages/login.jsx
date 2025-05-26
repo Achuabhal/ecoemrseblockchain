@@ -14,7 +14,10 @@ const Login = () => {
       const response = await axios.post('http://localhost:5000/lognin', {
         username,
         password,
-      });
+      },
+    {
+      withCredentials: true, // This enables sending cookies
+    });
       console.log('Login successful', response.data);
       navigate('/product');
     } catch (err) {

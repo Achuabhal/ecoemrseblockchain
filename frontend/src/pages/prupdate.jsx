@@ -131,23 +131,7 @@ function ProductForm() {
         <button type="submit" style={buttonStyle} disabled={!account}>Save Product</button>
       </form>
 
-      <hr style={{ margin: '30px 0' }} />
-
-      <h2 style={sectionTitle}>Fetched Product</h2>
-      {fetchedProduct ? (
-        <div>
-          <p><strong>Name:</strong> {fetchedProduct.name}</p>
-          <p><strong>Description:</strong> {fetchedProduct.description}</p>
-          {fetchedProduct.price !== undefined && <p><strong>Price:</strong> ₹{fetchedProduct.price}</p>}
-          {fetchedProduct.category && <p><strong>Category:</strong> {fetchedProduct.category}</p>}
-          {fetchedProduct.imageUrl && (
-            <img src={fetchedProduct.imageUrl} alt={fetchedProduct.name || 'Product'} style={imageStyle} />
-          )}
-          <button style={{ ...buttonStyle, backgroundColor: '#e74c3c' }}>Delete</button>
-        </div>
-      ) : (
-        <p>{account ? 'Fetching product or no product found...' : 'Connect your wallet to see your product.'}</p>
-      )}
+      
     </div>
   );
 }

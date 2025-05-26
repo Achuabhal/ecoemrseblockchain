@@ -580,28 +580,7 @@ export default function EcommercePage() {
             <hr style={{ margin: '20px 0' }} />
 
             {/* Confirm Delivery Form */}
-            {contract && (
-                <form onSubmit={handleConfirmDelivery}>
-                    <h2>Confirm Delivery (Owner Only)</h2>
-                    {account && owner && account.toLowerCase() !== owner.toLowerCase() && (
-                        <p style={{color: 'orange'}}>Warning: You are not the contract owner.</p>
-                    )}
-                    <div>
-                        <label>Escrow ID: </label>
-                        <input
-                            type="number"
-                            value={escrowIdToConfirm}
-                            onChange={(e) => setEscrowIdToConfirm(e.target.value)}
-                            placeholder="Enter Escrow ID"
-                            required
-                            style={{ margin: '5px 0' }}
-                        />
-                    </div>
-                    <button type="submit" disabled={loading || (account && owner && account.toLowerCase() !== owner.toLowerCase())}>
-                        {loading ? 'Processing...' : 'Confirm Delivery'}
-                    </button>
-                </form>
-            )}
+            
 
             {/* Message Area */}
             {message && (
