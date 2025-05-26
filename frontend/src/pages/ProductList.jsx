@@ -197,6 +197,8 @@ function EscrowComponent() {
         } finally {
             setLoading(false);
         }
+
+        
     };
 
     // --- Render JSX ---

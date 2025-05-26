@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect  } from 'react';
 import api from '../conection/axios';
+import { Link } from 'react-router-dom';
+
 
 function ProductForm() {
   const [product, setProduct] = useState({
@@ -130,8 +132,9 @@ function ProductForm() {
 
         <button type="submit" style={buttonStyle} disabled={!account}>Save Product</button>
       </form>
-
-      
+    <Link to="/test">
+              <button type="submit" style={buttonStyle} disabled={!account}>see orders</button>
+    </Link>
     </div>
   );
 }

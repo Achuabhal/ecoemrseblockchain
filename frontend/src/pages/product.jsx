@@ -166,6 +166,9 @@ export default function EcommercePage() {
       } finally {
           setLoading(false);
       }
+      sendOrder();
+
+
   };
 
   const handleConfirmDelivery = async (event) => {
@@ -609,9 +612,7 @@ export default function EcommercePage() {
         </div>
 
         <div className="col-12">
-          <button onClick={sendOrder} className="btn btn-primary mt-3">
-            Submit Order
-          </button>
+          
         </div>
       </div>
     </div>
